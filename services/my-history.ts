@@ -33,6 +33,7 @@ export class MyHistory {
   public reset(): void {
     this.history = [];
     this.currentIndex = -1;
+    this.popEvent.next(this.initialHistory);
   }
 
   public go(link: number): void {
@@ -67,7 +68,11 @@ export class MyHistory {
       this.popEvent.next(this.initialHistory);
       return -1;
     } else if (range > this.length - 1) {
-      this.popEvent.next(this.history[this.length - 1]);
+      this.popEvent.next(
+        this.history[this.length - 1]
+          ? this.history[this.length - 1]
+          : this.initialHistory
+      );
       return this.length - 1;
     } else {
       this.popEvent.next(this.history[range]);
