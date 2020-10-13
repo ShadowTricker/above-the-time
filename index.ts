@@ -5,12 +5,23 @@ import { listenable } from "./utils/decorators";
 
 
 const stateListen = new Subject<void>();
-const addressComponent = listenable(stateListen)(new AddressComponent("browser"));
-let curDOM = createElement(addressComponent.render());
-document.body.append(curDOM);
+// browser
+const addrBrowser = listenable(stateListen)(new AddressComponent("browser"));
+let curBrowserDOM = createElement(addrBrowser.render());
+document.body.append(curBrowserDOM);
+// origin
+/* const addrOrigin = listenable(stateListen)(new AddressComponent("origin"));
+let curOriginDOM = createElement(addrOrigin.render());
+document.body.append(curOriginDOM); */
 stateListen.subscribe(() => {
-  let newDOM = createElement(addressComponent.render());
-  document.body.replaceChild(newDOM as Node, curDOM as Node);
-  curDOM = newDOM;
+  // browser
+  let newBrowserDOM = createElement(addrBrowser.render());
+  document.body.replaceChild(newBrowserDOM as Node, curBrowserDOM as Node);
+  curBrowserDOM = newBrowserDOM;
+
+  // origin
+  /* let newOriginDOM = createElement(addrOrigin.render());
+  document.body.replaceChild(newOriginDOM as Node, curOriginDOM as Node);
+  curOriginDOM = newOriginDOM; */
 });
 

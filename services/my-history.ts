@@ -44,6 +44,11 @@ export class MyHistory {
   public pop(): void {
     this.history.pop();
     this.currentIndex = this.length - 1;
+    this.popEvent.next(
+      this.currentIndex === -1
+        ? this.initialHistory
+        : this.history[this.currentIndex]
+    );
   }
 
   public forward(): void {
