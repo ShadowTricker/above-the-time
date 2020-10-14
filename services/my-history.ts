@@ -28,6 +28,10 @@ export class MyHistory {
       : this.history[this.currentIndex].url;
   }
 
+  get currentHistory() {
+    return this.history;
+  }
+
   constructor() {}
 
   public reset(): void {
@@ -62,11 +66,13 @@ export class MyHistory {
   public pushState(urlObject: HistoryObject): void {
     this.history = [...this.history.slice(0, this.currentIndex + 1), urlObject];
     this.currentIndex = this.length - 1;
+    this.popEvent.next(urlObject);
   }
 
   public replaceState(urlObject: HistoryObject): void {
     this.history = [...this.history.slice(0, this.currentIndex), urlObject];
     this.currentIndex = this.length - 1;
+    this.popEvent.next(urlObject);
   }
 
   public listenPopState(): Subject<HistoryObject> {

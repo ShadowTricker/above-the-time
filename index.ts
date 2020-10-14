@@ -10,9 +10,9 @@ const addrBrowser = listenable(stateListen)(new AddressComponent("browser"));
 let curBrowserDOM = createElement(addrBrowser.render());
 document.body.append(curBrowserDOM);
 // origin
-/* const addrOrigin = listenable(stateListen)(new AddressComponent("origin"));
+const addrOrigin = listenable(stateListen)(new AddressComponent("origin"));
 let curOriginDOM = createElement(addrOrigin.render());
-document.body.append(curOriginDOM); */
+document.body.append(curOriginDOM);
 stateListen.subscribe(() => {
   // browser
   let newBrowserDOM = createElement(addrBrowser.render());
@@ -20,8 +20,8 @@ stateListen.subscribe(() => {
   curBrowserDOM = newBrowserDOM;
 
   // origin
-  /* let newOriginDOM = createElement(addrOrigin.render());
+  let newOriginDOM = createElement(addrOrigin.render());
   document.body.replaceChild(newOriginDOM as Node, curOriginDOM as Node);
-  curOriginDOM = newOriginDOM; */
+  curOriginDOM = newOriginDOM;
 });
 
